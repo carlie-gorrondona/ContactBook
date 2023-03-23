@@ -111,7 +111,10 @@ def searchContactMenu(contact):
             print("Invalid input")
 
 
-#def editContact(contact):
+def editContact(contact):
+    print()
+
+        
     
 
 def deleteContact(contact):
@@ -121,10 +124,11 @@ def deleteContact(contact):
 
     match userInputYorN:
         case "Y":
-            del contact
+            contactsArray.remove(contact)
             print("Contact deleted")
             for contact in contactsArray:
-                print(contact)
+                print(contact)               
+            mainMenu()
         case "N":
             searchContactMenu()
         case _:
