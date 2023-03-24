@@ -10,7 +10,7 @@
 
 #--------------------- FUNCTIONS & CLASSES ---------------------#
 
-class Contact:
+class ContactBook:
     def __init__(self, firstName, lastName, phoneNumber, email, address):
         self.firstName = firstName
         self.lastName = lastName
@@ -41,9 +41,9 @@ def mainMenu():
         case "2":
             searchContact()
         case "3":
-            editContact()
+            editContactFromMainMenu()
         case "4":
-            deleteContact()
+            deleteContactFromMainMenu()
         case "5":
             print("Goodbye")
         case _:
@@ -58,7 +58,7 @@ def createNewContact():
     inputEmail = input("Email: ")
     inputAddress = input("Address: ")
 
-    newContact = Contact(inputFirstName, inputLastName, inputPhoneNumber, inputEmail, inputAddress)
+    newContact = ContactBook(inputFirstName, inputLastName, inputPhoneNumber, inputEmail, inputAddress)
 
     contactsArray.append(newContact)
 
@@ -75,14 +75,18 @@ def searchContact():
     userSearchInput = input("First Name: ")
 
     loopCount = 1
+    notFound = True
 
     for contact in contactsArray:
         if userSearchInput == contact.firstName:
             print(contact)
             searchContactMenu(contact)
-        elif userSearchInput != contact.firstName and loopCount == len(contactsArray):
-            print("Contact Not Found")
-    
+            notFound = False
+        
+    if notFound:
+        print("Contact Not Found")
+        mainMenu()
+            
     
 
 def searchContactMenu(contact):
@@ -110,15 +114,115 @@ def searchContactMenu(contact):
         case _:
             print("Invalid input")
 
+def editContactFromMainMenu():
+    print("Please enter the first name of the contact you would like to edit.")
+    userSearchToEditInput = input("First Name: ")
+
+    loopCount = 1
+    notFound = True
+
+    for contact in contactsArray:
+        if userSearchToEditInput == contact.firstName:
+            print(contact)
+            editContact(contact)
+            notFound = False
+    if notFound:
+        print("Contact Not Found")
+        mainMenu()
 
 def editContact(contact):
-    print()
+    print("What would you like to edit?")
+    print("1. First Name")
+    print("2. Last Name")
+    print("3. Phone Number")
+    print("4. Email")
+    print("5. Address")
+    print("6. All Fields")
+    print("7. Back to Main Menu")
+    userEditInput = input("Your Selection: ")
 
-        
-    
+    match userEditInput:
+        case "1":
+            print("Enter contact's first name.")
+            userFirstNameInput = input("First Name: ")
+            contact.firstName = userFirstNameInput
+            print("Contact updated")
+            editAnotherFieldMenu()
+        case "2":
+            print("Enter contact's last name.")
+            userLastNameInput = input("Last Name: ")
+            contact.lastName = userLastNameInput
+            print("Contact updated")
+            editAnotherFieldMenu()
+        case "3":
+            print("Enter contact's phone number.")
+            userPhoneNumberInput = input("Phone Number: ")
+            contact.phoneNumber = userPhoneNumberInput
+            print("Contact updated")
+            editAnotherFieldMenu()
+        case "4":
+            print("Enter contact's email.")
+            userEmailInput = input("Email: ")
+            contact.email = userEmailInput
+            print("Contact updated")
+            editAnotherFieldMenu()
+        case "5":
+            print("Enter contact's address.")
+            userAddressInput = input("Address: ")
+            contact.address = userAddressInput
+            print("Contact updated")
+            editAnotherFieldMenu()
+        case "6":
+            print("Enter contact's first name.")
+            userFirstNameInput = input("First Name: ")
+            contact.firstName = userFirstNameInput
+            print("Enter contact's last name.")
+            userLastNameInput = input("Last Name: ")
+            contact.lastName = userLastNameInput
+            print("Enter contact's phone number.")
+            userPhoneNumberInput = input("Phone Number: ")
+            contact.phoneNumber = userPhoneNumberInput
+            print("Enter contact's email.")
+            userEmailInput = input("Email: ")
+            contact.email = userEmailInput
+            print("Enter contact's address.")
+            userAddressInput = input("Address: ")
+            contact.address = userAddressInput
+            print("Contact updated")
+            mainMenu()
+        case "7":
+            mainMenu()
+        case _:
+            print("Invalid input")
+
+def editAnotherFieldMenu():
+    print("Would you like to edit something else?")
+    userEditInput = input("Enter 'Y' for 'Yes' or 'N' for 'No': ")
+
+    match userEditInput:
+        case 'Y':
+            editContact()
+        case 'N':
+            mainMenu()
+
+def deleteContactFromMainMenu():
+    print("Please enter the first name of the contact you would like to view.")
+    userSearchToDeleteInput = input("First Name: ")
+
+    loopCount = 1
+    notFound = True
+
+    for contact in contactsArray:
+        if userSearchToDeleteInput == contact.firstName:
+            print(contact)
+            deleteContact(contact)
+            notFound = False
+
+    if notFound:
+        print("Contact Not Found")
+        mainMenu()
 
 def deleteContact(contact):
-
     print("Are you sure you want to delete this contact?")
     userInputYorN = input("Enter 'Y' for 'Yes' or 'N' for 'No': ")
 
@@ -137,9 +241,9 @@ def deleteContact(contact):
 
 #--------------------- MAIN ---------------------#
 
-contactOne = Contact("Bubbles", "Smith", "123-123-0666", "bubbles@mailinator.com", "Shed")
-contactTwo = Contact("Ricky", "Wells", "123-122-0000", "rwells@sunnyvale.com", "1 Bonneview")
-contactThree = Contact("Julian", "Tremblay", "123-100-0000", "jtremblay@mailinator.com", "5 Maple Lake Drive")
+contactOne = ContactBook("Bubbles", "Smith", "123-123-0666", "bubbles@mailinator.com", "Shed")
+contactTwo = ContactBook("Ricky", "Wells", "123-122-0000", "rwells@sunnyvale.com", "1 Bonneview")
+contactThree = ContactBook("Julian", "Tremblay", "123-100-0000", "jtremblay@mailinator.com", "5 Maple Lake Drive")
 
 contactsArray = [contactOne, contactTwo, contactThree]
 
