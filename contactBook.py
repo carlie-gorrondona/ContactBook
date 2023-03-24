@@ -72,7 +72,6 @@ def searchContact():
     print("Please enter the first name of the contact you would like to view.")
     userSearchInput = input("First Name: ")
 
-    loopCount = 1
     notFound = True
 
     for contact in contactsArray:
@@ -120,7 +119,6 @@ def editContactFromMainMenu():
     print("Please enter the first name of the contact you would like to edit.")
     userSearchToEditInput = input("First Name: ")
 
-    loopCount = 1
     notFound = True
 
     for contact in contactsArray:
@@ -228,7 +226,6 @@ def deleteContactFromMainMenu():
     print("Please enter the first name of the contact you would like to view.")
     userSearchToDeleteInput = input("First Name: ")
 
-    loopCount = 1
     notFound = True
 
     for contact in contactsArray:
